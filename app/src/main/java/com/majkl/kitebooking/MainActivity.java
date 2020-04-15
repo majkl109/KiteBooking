@@ -5,15 +5,19 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     public static final String DATABASE_NAME = "studentsdatabase";
 
@@ -29,19 +33,35 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+
         sDatabase = openOrCreateDatabase(DATABASE_NAME, MODE_PRIVATE, null);
         createStudentTable();
 
         textViewViewStudents = findViewById(R.id.textViewViewStudents);
         editTextName = findViewById(R.id.editTextName);
         editTextDob = findViewById(R.id.editTextDob);
-        spinnerCour = findViewById(R.id.spinnerCourse);
+
+
+
+
+
+      //  spinnerCour = findViewById(R.id.spinnerCourses);
+       // ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+           //     R.array.courses, android.R.layout.simple_spinner_item);
+             //   adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+              //  spinnerCour.setAdapter(adapter);
+              //  spinnerCour.setOnItemClickListener(this);
 
         findViewById(R.id.buttonAddStudent).setOnClickListener(this);
         findViewById(R.id.textViewViewStudents).setOnClickListener(this);
 
 
     }
+
+
+
 
 
     private void createStudentTable() {
@@ -95,6 +115,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
+
+
         switch (view.getId()) {
             case R.id.buttonAddStudent:
 
@@ -111,6 +133,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+  //  @Override
+  //  public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+ //       String text = parent.getItemAtPosition(position).toString();
+   //     Toast.makeText(parent.getContext(),text, Toast.LENGTH_SHORT).show();
 }
+
 
 
