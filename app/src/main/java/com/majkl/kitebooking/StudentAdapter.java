@@ -41,7 +41,7 @@ public class StudentAdapter extends ArrayAdapter<Student> {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         LayoutInflater inflater = LayoutInflater.from(sCtx);
-        View view = inflater.inflate(listLayoutRes, null);
+        View view = inflater.inflate(this.listLayoutRes, null);
 
         //getting employee of the specified position
         final Student student = studentList.get(position);
