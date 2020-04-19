@@ -17,47 +17,49 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
-import java.util.List;
-
-public class StudentAdapter extends ArrayAdapter<Student> {
+import androidx.recyclerview.widget.RecyclerView;
 
 
-    Context sCtx;
-    int listLayoutRes;
-    List<Student> studentList;
-    SQLiteDatabase sDatabase;
 
-    public StudentAdapter(Context sCtx, int listLayoutRes, List<Student> studentList,SQLiteDatabase sDatabase) {
-        super(sCtx, listLayoutRes, studentList);
+public class StudentHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
+    private final TextView textViewName;
+    private final TextView textViewCourses;
+    private final TextView textViewDob;
+    private final TextView textViewJoiningDate;
+
+    private Student student;
+    private Context sCtx;
+
+    public StudentHolder(Context sCtx, View itemView) {
+        super(itemView);
 
         this.sCtx = sCtx;
-        this.listLayoutRes = listLayoutRes;
-        this.studentList = studentList;
-        this.sDatabase = sDatabase;
+
+        this.textViewName = itemView.findViewById(R.id.textViewName);
+        this.textViewCourses = itemView.findViewById(R.id.textViewCourses);
+        this.textViewDob = itemView.findViewById(R.id.textViewDob);
+        this.textViewJoiningDate = itemView.findViewById(R.id.textViewJoiningDate);
+
+        itemView.setOnClickListener(this);
+
     }
 
-    @NonNull
+    public void bindStudent(Student student) {
+
+        this.student = student;
+        this.textViewName.setText(student.name);
+        this.textViewCourses.setText(student.course);
+        this.textViewDob.setText((int) student.dob);
+        this.textViewJoiningDate.setText(student.joiningDate);
+    }
+
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        LayoutInflater inflater = LayoutInflater.from(sCtx);
-        View view = inflater.inflate(this.listLayoutRes, null);
+    public void onClick(View v) {
 
-        //getting employee of the specified position
-        final Student student = studentList.get(position);
+    }
 
 
-        //getting views
-        TextView textViewName = view.findViewById(R.id.textViewName);
-        TextView textViewCourse = view.findViewById(R.id.textViewCourses);
-        TextView textViewDob = view.findViewById(R.id.textViewDob);
-        TextView textViewJoiningDate = view.findViewById(R.id.textViewJoiningDate);
-
-        //adding data to views
-        textViewName.setText(student.getName());
-        textViewCourse.setText(student.getCourse());
-        textViewDob.setText(String.valueOf(student.getDob()));
-        textViewJoiningDate.setText(student.getJoiningDate());
 
         //we will use these buttons later for update and delete operation
         Button buttonDelete = view.findViewById(R.id.buttonDeleteStudent);
@@ -167,5 +169,6 @@ public class StudentAdapter extends ArrayAdapter<Student> {
         cursorStudents.close();
         notifyDataSetChanged();
     }
+
 
 }
