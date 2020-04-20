@@ -3,7 +3,9 @@ package com.majkl.kitebooking;
 public class Student {
 
     int id;
-    String name, course, joiningDate;
+    String name;
+    String course;
+    String joiningDate;
     double dob;
 
     public Student(int id, String name, String course, String joiningDate, double dob) {

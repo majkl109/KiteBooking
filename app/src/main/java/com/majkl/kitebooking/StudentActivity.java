@@ -15,7 +15,7 @@ public class StudentActivity extends AppCompatActivity {
     List<Student> studentList;
     SQLiteDatabase sDatabase;
     ListView listViewStudents;
-    StudentHolder adapter;
+    StudentAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +55,7 @@ public class StudentActivity extends AppCompatActivity {
         cursorStudents.close();
 
         //creating the adapter object
-        adapter = new StudentHolder(this,R.layout.student_list_layout,studentList, sDatabase);
+        adapter = new StudentAdapter(this,R.layout.student_list_layout,studentList, sDatabase);
 
         //adding the adapter to listview
         listViewStudents.setAdapter(adapter);

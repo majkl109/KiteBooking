@@ -14,51 +14,45 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.RecyclerView;
+import java.util.List;
 
 
+public class StudentAdapter extends ArrayAdapter<Student>{
 
-public class StudentHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    List<Student> studentList;
+    SQLiteDatabase sDatabase;
+    int listLayoutRes;
+    Context sCtx;
 
-    private final TextView textViewName;
-    private final TextView textViewCourses;
-    private final TextView textViewDob;
-    private final TextView textViewJoiningDate;
-
-    private Student student;
-    private Context sCtx;
-
-    public StudentHolder(Context sCtx, View itemView) {
-        super(itemView);
+    public StudentAdapter(Context sCtx, int listLayoutRes, List<Student> studentList, SQLiteDatabase sDatabase) {
+        super(sCtx, listLayoutRes, studentList);
 
         this.sCtx = sCtx;
-
-        this.textViewName = itemView.findViewById(R.id.textViewName);
-        this.textViewCourses = itemView.findViewById(R.id.textViewCourses);
-        this.textViewDob = itemView.findViewById(R.id.textViewDob);
-        this.textViewJoiningDate = itemView.findViewById(R.id.textViewJoiningDate);
-
-        itemView.setOnClickListener(this);
-
+        this.listLayoutRes = listLayoutRes;
+        this.studentList = studentList;
+        this.sDatabase = sDatabase;
     }
 
-    public void bindStudent(Student student) {
-
-        this.student = student;
-        this.textViewName.setText(student.name);
-        this.textViewCourses.setText(student.course);
-        this.textViewDob.setText((int) student.dob);
-        this.textViewJoiningDate.setText(student.joiningDate);
-    }
-
+    @NonNull
     @Override
-    public void onClick(View v) {
+    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+        LayoutInflater inflater = LayoutInflater.from(sCtx);
+        View view = inflater.inflate(listLayoutRes, null);
 
-    }
+        final Student student = studentList.get(position);
 
+        TextView textViewName = view.findViewById(R.id.textViewName);
+        TextView textViewCourses = view.findViewById(R.id.textViewCourses);
+        TextView textViewDob = view.findViewById(R.id.textViewDob);
+        TextView textViewJoiningDate = view.findViewById(R.id.textViewJoiningDate);
+
+
+        textViewName.setText(student.getName());
+        textViewCourses.setText(student.getCourse());
+        textViewDob.setText(String.valueOf(student.getDob()));
+        textViewJoiningDate.setText(student.getJoiningDate());
 
 
         //we will use these buttons later for update and delete operation
@@ -169,6 +163,5 @@ public class StudentHolder extends RecyclerView.ViewHolder implements View.OnCli
         cursorStudents.close();
         notifyDataSetChanged();
     }
-
 
 }

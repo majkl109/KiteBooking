@@ -17,67 +17,67 @@ import java.util.Calendar;
 import java.util.List;
 
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     public static final String DATABASE_NAME = "studentsdatabase";
 
-    SQLiteDatabase sDatabase;
 
     TextView textViewViewStudents;
     EditText editTextName, editTextDob;
     Spinner spinnerCour;
 
-
+    SQLiteDatabase sDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        textViewViewStudents = findViewById(R.id.textViewViewStudents);
+        editTextName = findViewById(R.id.editTextName);
+        editTextDob = findViewById(R.id.editTextDob);
+        spinnerCour = findViewById(R.id.spinnerCourse);
+
+
+        findViewById(R.id.buttonAddStudent).setOnClickListener(this);
+        textViewViewStudents.setOnClickListener(this);
 
 
         sDatabase = openOrCreateDatabase(DATABASE_NAME, MODE_PRIVATE, null);
         createStudentTable();
 
-        textViewViewStudents = findViewById(R.id.textViewViewStudents);
-        editTextName = findViewById(R.id.editTextName);
-        editTextDob = findViewById(R.id.editTextDob);
-
-
-
-
-
-      //  spinnerCour = findViewById(R.id.spinnerCourses);
-       // ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-           //     R.array.courses, android.R.layout.simple_spinner_item);
-             //   adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-              //  spinnerCour.setAdapter(adapter);
-              //  spinnerCour.setOnItemClickListener(this);
-
-        findViewById(R.id.buttonAddStudent).setOnClickListener(this);
-        findViewById(R.id.textViewViewStudents).setOnClickListener(this);
-
-
     }
-
-
-
-
 
     private void createStudentTable() {
 
-        String sql ="CREATE TABLE IF NOT EXISTS students (\n" +
-                        "    id int NOT NULL CONSTRAINT student_pk PRIMARY KEY,\n" +
-                        "    name varchar(200) NOT NULL,\n" +
-                        "    course varchar(200) NOT NULL,\n" +
-                        "    joiningdate datetime NOT NULL,\n" +
-                        "    dob double NOT NULL\n" +
-                        ");";
+        sDatabase.execSQL(
+                "CREATE TABLE IF NOT EXISTS students (\n" +
+                "    id int NOT NULL CONSTRAINT student_pk PRIMARY KEY,\n" +
+                "    name varchar(200) NOT NULL,\n" +
+                "    course varchar(200) NOT NULL,\n" +
+                "    joiningdate datetime NOT NULL,\n" +
+                "    dob double NOT NULL\n" +
+                ");"
 
-        sDatabase.execSQL(sql);
-
+        );
     }
 
+    private boolean inputsAreCorrect(String name, String dob) {
+
+        if (name.isEmpty()) {
+            editTextName.setError("Please enter a name");
+            editTextName.requestFocus();
+            return false;
+
+        }
+
+        if (dob.isEmpty()) {
+            editTextDob.setError("Please enter dob");
+            editTextDob.requestFocus();
+            return false;
+        }
+        return true;
+    }
 
     private void addStudent() {
 
@@ -85,25 +85,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String dob = editTextDob.getText().toString().trim();
         String cour = spinnerCour.getSelectedItem().toString();
 
-        if (name.isEmpty()) {
-            editTextName.setError("Please enter a name");
-            editTextName.requestFocus();
-            return;
-
-        }
-
-        if (dob.isEmpty()) {
-            editTextDob.setError("Please enter dob");
-            editTextDob.requestFocus();
-            return;
-
-        }
-
         Calendar cal = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
         String joiningDate = sdf.format(cal.getTime());
 
-
+        if(inputsAreCorrect(name, dob)) {
             String sql = "INSERT INTO students ( name, course, joiningdate, dob)" +
                     "VALUES (?, ?, ?, ?)";
 
@@ -111,6 +97,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             Toast.makeText(this, "Student added successfully", Toast.LENGTH_SHORT).show();
 
+        }
     }
 
     @Override
@@ -133,10 +120,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-  //  @Override
-  //  public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
- //       String text = parent.getItemAtPosition(position).toString();
-   //     Toast.makeText(parent.getContext(),text, Toast.LENGTH_SHORT).show();
 }
 
 
