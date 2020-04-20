@@ -5,16 +5,12 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -42,8 +38,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.buttonAddStudent).setOnClickListener(this);
         textViewViewStudents.setOnClickListener(this);
 
-
         sDatabase = openOrCreateDatabase(DATABASE_NAME, MODE_PRIVATE, null);
+
         createStudentTable();
 
     }
@@ -52,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         sDatabase.execSQL(
                 "CREATE TABLE IF NOT EXISTS students (\n" +
-                "    id int NOT NULL CONSTRAINT student_pk PRIMARY KEY,\n" +
+                "    id INTEGER NOT NULL CONSTRAINT student_pk PRIMARY KEY AUTOINCREMENT,\n" +
                 "    name varchar(200) NOT NULL,\n" +
                 "    course varchar(200) NOT NULL,\n" +
                 "    joiningdate datetime NOT NULL,\n" +
@@ -63,7 +59,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private boolean inputsAreCorrect(String name, String dob) {
-
         if (name.isEmpty()) {
             editTextName.setError("Please enter a name");
             editTextName.requestFocus();
@@ -71,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         }
 
-        if (dob.isEmpty()) {
+        if (dob.isEmpty()|| Integer.parseInt(dob) <= 0) {
             editTextDob.setError("Please enter dob");
             editTextDob.requestFocus();
             return false;
@@ -90,26 +85,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String joiningDate = sdf.format(cal.getTime());
 
         if(inputsAreCorrect(name, dob)) {
-            String sql = "INSERT INTO students ( name, course, joiningdate, dob)" +
-                    "VALUES (?, ?, ?, ?)";
+            String sql = "INSERT INTO students \n" +
+                    "(name, course, joiningdate, dob)\n" +
+                    "VALUES \n " +
+                    "(?, ?, ?, ?)";
 
             sDatabase.execSQL(sql, new String[]{name, cour, joiningDate, dob});
 
             Toast.makeText(this, "Student added successfully", Toast.LENGTH_SHORT).show();
 
         }
+
     }
 
     @Override
     public void onClick(View view) {
-
-
         switch (view.getId()) {
             case R.id.buttonAddStudent:
 
                 addStudent();
-                break;
 
+                break;
             case R.id.textViewViewStudents:
 
 
