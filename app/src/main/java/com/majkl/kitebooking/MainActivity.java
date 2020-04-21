@@ -1,6 +1,5 @@
 package com.majkl.kitebooking;
 
-import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -9,6 +8,9 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -18,9 +20,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static final String DATABASE_NAME = "studentsdatabase";
 
 
+
+
     TextView textViewViewStudents;
     EditText editTextName, editTextDob;
-    Spinner spinnerCour;
+    Spinner spinnerCourse;
 
     SQLiteDatabase sDatabase;
 
@@ -32,7 +36,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         textViewViewStudents = findViewById(R.id.textViewViewStudents);
         editTextName = findViewById(R.id.editTextName);
         editTextDob = findViewById(R.id.editTextDob);
-        spinnerCour = findViewById(R.id.spinnerCourse);
+
+        spinnerCourse = findViewById(R.id.spinnerCourses);
 
 
         findViewById(R.id.buttonAddStudent).setOnClickListener(this);
@@ -78,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         String name = editTextName.getText().toString().trim();
         String dob = editTextDob.getText().toString().trim();
-        String cour = spinnerCour.getSelectedItem().toString();
+        String course = spinnerCourse.getSelectedItem().toString();
 
         Calendar cal = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
@@ -90,7 +95,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     "VALUES \n " +
                     "(?, ?, ?, ?)";
 
-            sDatabase.execSQL(sql, new String[]{name, cour, joiningDate, dob});
+            sDatabase.execSQL(sql, new String[]{name, course, joiningDate, dob});
 
             Toast.makeText(this, "Student added successfully", Toast.LENGTH_SHORT).show();
 

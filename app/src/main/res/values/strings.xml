@@ -1,11 +1,11 @@
 <resources>
     <string name="app_name">KiteBooking</string>
 
-    <string-array name="courses">
+    <array name="courses">
         <item>Discovery</item>
         <item>Beginner</item>
         <item>Intermediate</item>
         <item>Advanced</item>
         <item>Foil course</item>
-    </string-array>
+    </array>
 </resources>
