@@ -1,11 +1,11 @@
 package com.majkl.kitebooking;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.widget.ListView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +47,7 @@ public class StudentActivity extends AppCompatActivity {
                         cursorStudents.getString(1),
                         cursorStudents.getString(2),
                         cursorStudents.getString(3),
-                        cursorStudents.getDouble(4)
+                        cursorStudents.getInt(4)
                 ));
             } while (cursorStudents.moveToNext());
         }

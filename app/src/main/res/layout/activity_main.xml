@@ -22,6 +22,17 @@
             android:textAlignment="center"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
 
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="20dp"
+            android:background="@color/colorPrimaryDark"
+            android:src="@drawable/addphoto" />
+
+
         <EditText
             android:id="@+id/editTextName"
             android:layout_width="match_parent"

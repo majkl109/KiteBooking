@@ -156,7 +156,7 @@ public class StudentAdapter extends ArrayAdapter<Student>{
                         cursorStudents.getString(1),
                         cursorStudents.getString(2),
                         cursorStudents.getString(3),
-                        cursorStudents.getDouble(4)
+                        cursorStudents.getInt(4)
                 ));
             } while (cursorStudents.moveToNext());
         }

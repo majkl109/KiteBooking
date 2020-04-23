@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 "    name varchar(200) NOT NULL,\n" +
                 "    course varchar(200) NOT NULL,\n" +
                 "    joiningdate datetime NOT NULL,\n" +
-                "    dob double NOT NULL\n" +
+                "    dob int NOT NULL\n" +
                 ");"
 
         );

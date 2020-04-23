@@ -6,9 +6,9 @@ public class Student {
     String name;
     String course;
     String joiningDate;
-    double dob;
+    int dob;
 
-    public Student(int id, String name, String course, String joiningDate, double dob) {
+    public Student(int id, String name, String course, String joiningDate, int dob) {
         this.id = id;
         this.name = name;
         this.course = course;
@@ -32,7 +32,7 @@ public class Student {
         return joiningDate;
     }
 
-    public double getDob() {
+    public int getDob() {
         return dob;
     }
 }
