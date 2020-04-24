@@ -47,7 +47,8 @@ public class StudentActivity extends AppCompatActivity {
                         cursorStudents.getString(1),
                         cursorStudents.getString(2),
                         cursorStudents.getString(3),
-                        cursorStudents.getInt(4)
+                        cursorStudents.getInt(4),
+                        cursorStudents.getBlob(5)
                 ));
             } while (cursorStudents.moveToNext());
         }

@@ -7,13 +7,15 @@ public class Student {
     String course;
     String joiningDate;
     int dob;
+    byte[] image;
 
-    public Student(int id, String name, String course, String joiningDate, int dob) {
+    public Student(int id, String name, String course, String joiningDate, int dob, byte[] image) {
         this.id = id;
         this.name = name;
         this.course = course;
         this.joiningDate = joiningDate;
         this.dob = dob;
+        this.image = image;
     }
 
     public int getId() {
@@ -35,5 +37,8 @@ public class Student {
     public int getDob() {
         return dob;
     }
+
+    public byte[] getImage() {
+        return image; }
 }
 

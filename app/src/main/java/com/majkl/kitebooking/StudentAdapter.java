@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -47,12 +48,14 @@ public class StudentAdapter extends ArrayAdapter<Student>{
         TextView textViewCourses = view.findViewById(R.id.textViewCourses);
         TextView textViewDob = view.findViewById(R.id.textViewDob);
         TextView textViewJoiningDate = view.findViewById(R.id.textViewJoiningDate);
+        ImageView imageViewImage = view.findViewById(R.id.imageViewImage);
 
 
         textViewName.setText(student.getName());
         textViewCourses.setText(student.getCourse());
         textViewDob.setText(String.valueOf(student.getDob()));
         textViewJoiningDate.setText(student.getJoiningDate());
+        imageViewImage.set(student.getImage());
 
 
         //we will use these buttons later for update and delete operation
