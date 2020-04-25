@@ -55,7 +55,7 @@ public class StudentAdapter extends ArrayAdapter<Student>{
         textViewCourses.setText(student.getCourse());
         textViewDob.setText(String.valueOf(student.getDob()));
         textViewJoiningDate.setText(student.getJoiningDate());
-        imageViewImage.set(student.getImage());
+        imageViewImage.(student.getImage());
 
 
         //we will use these buttons later for update and delete operation
@@ -159,7 +159,8 @@ public class StudentAdapter extends ArrayAdapter<Student>{
                         cursorStudents.getString(1),
                         cursorStudents.getString(2),
                         cursorStudents.getString(3),
-                        cursorStudents.getInt(4)
+                        cursorStudents.getInt(4),
+                        cursorStudents.getBlob(5)
                 ));
             } while (cursorStudents.moveToNext());
         }

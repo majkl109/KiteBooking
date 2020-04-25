@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String name = editTextName.getText().toString().trim();
         String dob = editTextDob.getText().toString().trim();
         String course = spinnerCourse.getSelectedItem().toString();
-        byte[] image = imageViewToByte(mImageView);
+        byte   image = mImageView.setImageResource(R.drawable.add_photo);
 
         Calendar cal = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
