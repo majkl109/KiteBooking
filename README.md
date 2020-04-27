@@ -1,0 +1,2 @@
+# KiteBooking
+Student registration app
