@@ -55,7 +55,7 @@ public class StudentAdapter extends ArrayAdapter<Student>{
         textViewCourses.setText(student.getCourse());
         textViewDob.setText(String.valueOf(student.getDob()));
         textViewJoiningDate.setText(student.getJoiningDate());
-        imageViewImage.(student.getImage());
+        //imageViewImage.(student.getImage());
 
 
         //we will use these buttons later for update and delete operation
